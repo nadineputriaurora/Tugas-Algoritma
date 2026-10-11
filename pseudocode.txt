@@ -1,0 +1,77 @@
+================================================================================
+PROGRAM HitungNilaiAkhirDanGrade
+================================================================================
+Deskripsi:
+Program untuk menghitung nilai akhir mahasiswa berdasarkan 3 komponen:
+- Tugas (bobot 30%)
+- UTS   (bobot 30%)
+- UAS   (bobot 40%)
+dan menentukan huruf mutu (Grade) dengan fitur perulangan (dapat mengulang
+perhitungan atau keluar dari program).
+
+--------------------------------------------------------------------------------
+DEKLARASI / KAMUS:
+--------------------------------------------------------------------------------
+    // Variabel Masukan Komponen Nilai
+    nilai_tugas   : REAL
+    nilai_uts     : REAL
+    nilai_uas     : REAL
+
+    // Variabel Kalkulasi dan Hasil
+    nilai_akhir   : REAL
+    grade         : CHAR
+
+    // Variabel Kontrol Perulangan
+    pilihan_ulang : CHAR
+
+--------------------------------------------------------------------------------
+DESKRIPSI / ALGORITMA:
+--------------------------------------------------------------------------------
+BEGIN
+    REPEAT
+        // 1. INPUT: Menerima masukan nilai dari pengguna
+        OUTPUT("=== SISTEM PENILAIAN AKHIR MAHASISWA ===")
+        OUTPUT("Masukkan Nilai Tugas (0 - 100) : ")
+        INPUT(nilai_tugas)
+
+        OUTPUT("Masukkan Nilai UTS   (0 - 100) : ")
+        INPUT(nilai_uts)
+
+        OUTPUT("Masukkan Nilai UAS   (0 - 100) : ")
+        INPUT(nilai_uas)
+
+        // 2. PROSES: Perhitungan Nilai Akhir berbobot
+        nilai_akhir <- (0.30 * nilai_tugas) + (0.30 * nilai_uts) + (0.40 * nilai_uas)
+
+        // 3. PROSES: Penentuan Grade dengan seleksi bertingkat (Nested IF)
+        IF (nilai_akhir >= 81) THEN
+            grade <- 'A'
+        ELSE IF (nilai_akhir >= 70) THEN
+            grade <- 'B'
+        ELSE IF (nilai_akhir >= 60) THEN
+            grade <- 'C'
+        ELSE IF (nilai_akhir >= 50) THEN
+            grade <- 'D'
+        ELSE
+            grade <- 'E'
+        END IF
+
+        // 4. OUTPUT: Menampilkan hasil kalkulasi dan grade
+        OUTPUT("========================================")
+        OUTPUT("HASIL PENILAIAN AKHIR:")
+        OUTPUT("Nilai Tugas : ", nilai_tugas)
+        OUTPUT("Nilai UTS   : ", nilai_uts)
+        OUTPUT("Nilai UAS   : ", nilai_uas)
+        OUTPUT("----------------------------------------")
+        OUTPUT("Nilai Akhir : ", nilai_akhir)
+        OUTPUT("Grade       : ", grade)
+        OUTPUT("========================================")
+
+        // 5. KONTROL: Konfirmasi pengulangan program
+        OUTPUT("Apakah ingin menghitung nilai lagi? (Y/T): ")
+        INPUT(pilihan_ulang)
+
+    UNTIL (pilihan_ulang = 'T' OR pilihan_ulang = 't')
+
+    OUTPUT("Program selesai. Terima kasih.")
+END

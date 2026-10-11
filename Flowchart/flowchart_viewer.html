@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisasi Flowchart Sistem Penilaian Akhir</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            max-width: 950px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .mermaid {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .btn-group {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+        }
+        .btn {
+            background: linear-space;
+            background-color: #0284c7;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover {
+            background-color: #0369a1;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #475569;
+            color: #cbd5e1;
+        }
+        .btn-outline:hover {
+            background-color: #334155;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>DIAGRAM ALIR (FLOWCHART) SISTEM PENILAIAN AKHIR</h1>
+        <p>Visualisasi interaktif alur perhitungan bobot nilai dan penentuan grade</p>
+    </div>
+
+    <div class="card">
+        <div class="mermaid">
+flowchart TD
+    Start([Mulai]) --> In[/Input: nilai_tugas, nilai_uts, nilai_uas/]
+    In --> Calc["Hitung: nilai_akhir = (0.3*tugas) + (0.3*uts) + (0.4*uas)"]
+    
+    Calc --> CondA{"nilai_akhir >= 81 ?"}
+    CondA -- Ya --> SetA["grade = 'A'"]
+    CondA -- Tidak --> CondB{"nilai_akhir >= 70 ?"}
+    
+    CondB -- Ya --> SetB["grade = 'B'"]
+    CondB -- Tidak --> CondC{"nilai_akhir >= 60 ?"}
+    
+    CondC -- Ya --> SetC["grade = 'C'"]
+    CondC -- Tidak --> CondD{"nilai_akhir >= 50 ?"}
+    
+    CondD -- Ya --> SetD["grade = 'D'"]
+    CondD -- Tidak --> SetE["grade = 'E'"]
+    
+    SetA --> Out[/Tampilkan: nilai_akhir & grade/]
+    SetB --> Out
+    SetC --> Out
+    SetD --> Out
+    SetE --> Out
+    
+    Out --> InUlang[/Input: pilihan_ulang Y/T/]
+    InUlang --> CheckUlang{"pilihan_ulang == 'Y' ?"}
+    CheckUlang -- Ya (Ulangi) --> In
+    CheckUlang -- Tidak (Keluar) --> EndNode([Selesai])
+        </div>
+
+        <div class="btn-group">
+            <a href="flowchart.png" download class="btn">Unduh Gambar PNG</a>
+            <a href="flowchart.svg" download class="btn btn-outline">Unduh Format SVG</a>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#0284c7',
+                primaryTextColor: '#f8fafc',
+                primaryBorderColor: '#38bdf8',
+                lineColor: '#94a3b8',
+                secondaryColor: '#334155',
+                tertiaryColor: '#1e293b'
+            }
+        });
+    </script>
+</body>
+</html>
